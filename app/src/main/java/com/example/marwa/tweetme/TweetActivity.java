@@ -107,9 +107,11 @@ public class TweetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final TwitterSession session = TwitterCore.getInstance().getSessionManager()
                         .getActiveSession();
+                //Uri uri = Uri.parse("android.resource://com.example.marwa.tweetme/drawable/twitter");
                 final Intent intent = new ComposerActivity.Builder(TweetActivity.this)
                         .session(session)
                         .text("Write Your Tweets Here")
+                        //.image(uri)
                         .hashtags("#twitter")
                         .createIntent();
                 startActivity(intent);
