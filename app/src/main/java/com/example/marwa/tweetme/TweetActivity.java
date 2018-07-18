@@ -50,13 +50,11 @@ public class TweetActivity extends AppCompatActivity {
                 .screenName(username)
                 .build();
 
-
         final TweetTimelineRecyclerViewAdapter adapter =
                 new TweetTimelineRecyclerViewAdapter.Builder(this)
                         .setTimeline(userTimeline)
                         .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
                         .build();
-
 
         // If there is a list, hide TextView
         TextView empty = (TextView) findViewById(R.id.emptyList);
@@ -100,8 +98,7 @@ public class TweetActivity extends AppCompatActivity {
             }
         });
 
-
-
+        // Compose Tweets
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,27 +117,7 @@ public class TweetActivity extends AppCompatActivity {
         });
 
 
-
-        /*
-        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-        final StatusesService statusesService = twitterApiClient.getStatusesService();
-        Call<Tweet> call = statusesService.show(524971209851543553L, null, null, null);
-        call.enqueue(new Callback<Tweet>() {
-            @Override
-            public void success(Result<Tweet> result) {
-                //Do something with result
-                //statusesService.
-            }
-
-            public void failure(TwitterException exception) {
-                //Do something on failure
-
-            }
-        });
-        */
-
     }
-
 
     /**
      * Create the menu
@@ -152,7 +129,5 @@ public class TweetActivity extends AppCompatActivity {
         searchView.setMenuItem(item);
         return true;
     }
-
-
-
+    
 }
