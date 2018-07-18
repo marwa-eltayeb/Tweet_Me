@@ -48,6 +48,8 @@ public class TweetActivity extends AppCompatActivity {
         /* setting up a UserTimeline */
         final UserTimeline userTimeline = new UserTimeline.Builder()
                 .screenName(username)
+                .includeReplies(true)
+                .includeRetweets(true)
                 .build();
 
         final TweetTimelineRecyclerViewAdapter adapter =
@@ -129,5 +131,5 @@ public class TweetActivity extends AppCompatActivity {
         searchView.setMenuItem(item);
         return true;
     }
-    
+
 }
