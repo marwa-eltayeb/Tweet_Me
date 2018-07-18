@@ -31,10 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         //Make sure that this statement is added before setContentView() method
         setContentView(R.layout.activity_login);
 
-
         //Instantiating loginButton
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
-
 
 
          /*
@@ -53,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 String token = authToken.token;
                 String secret = authToken.secret;
 
+
                 // Calling login method and passing twitter session
                 login(session);
             }
@@ -64,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -75,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
     public void login(TwitterSession session)
     {
         String username = session.getUserName();
-        long tweetId = session.getId();
         Intent intent = new Intent(LoginActivity.this, TweetActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
@@ -93,10 +90,6 @@ public class LoginActivity extends AppCompatActivity {
         // Pass the activity result to the login button.
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
-
 
 
 }

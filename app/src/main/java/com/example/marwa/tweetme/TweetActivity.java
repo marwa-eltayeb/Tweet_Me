@@ -50,6 +50,7 @@ public class TweetActivity extends AppCompatActivity {
                 .screenName(username)
                 .build();
 
+
         final TweetTimelineRecyclerViewAdapter adapter =
                 new TweetTimelineRecyclerViewAdapter.Builder(this)
                         .setTimeline(userTimeline)
@@ -118,6 +119,26 @@ public class TweetActivity extends AppCompatActivity {
             }
         });
 
+
+
+        /*
+        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
+        final StatusesService statusesService = twitterApiClient.getStatusesService();
+        Call<Tweet> call = statusesService.show(524971209851543553L, null, null, null);
+        call.enqueue(new Callback<Tweet>() {
+            @Override
+            public void success(Result<Tweet> result) {
+                //Do something with result
+                //statusesService.
+            }
+
+            public void failure(TwitterException exception) {
+                //Do something on failure
+
+            }
+        });
+        */
+
     }
 
 
@@ -131,6 +152,7 @@ public class TweetActivity extends AppCompatActivity {
         searchView.setMenuItem(item);
         return true;
     }
+
 
 
 }

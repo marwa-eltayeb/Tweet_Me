@@ -9,9 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TweetActivity">
-
-        </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +17,19 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".TweetActivity"
+            android:theme="@style/ActivityTheme">
+
+        </activity>
+
         <receiver
             android:name=".MyTweetReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS"/>
-                <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_FAILURE"/>
-                <action android:name="com.twitter.sdk.android.tweetcomposer.TWEET_COMPOSE_CANCEL"/>
+                <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS" />
+                <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_FAILURE" />
+                <action android:name="com.twitter.sdk.android.tweetcomposer.TWEET_COMPOSE_CANCEL" />
             </intent-filter>
         </receiver>
     </application>

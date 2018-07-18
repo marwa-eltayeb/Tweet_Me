@@ -7,57 +7,63 @@
     android:orientation="vertical"
     tools:context="com.example.marwa.tweetme.TweetActivity">
 
-    <!-- Must be last for right layering display -->
-    <FrameLayout
-        android:id="@+id/toolbar_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary" />
-
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:searchBackIcon="@drawable/ic_action_navigation_arrow_back"
-            app:searchCloseIcon="@drawable/ic_action_navigation_close" />
-    </FrameLayout>
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <!-- Must be last for right layering display -->
+        <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:divider="#e1e8ed"
-            android:dividerHeight="1dp"
-            android:drawSelectorOnTop="false" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/emptyList"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary" />
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:searchBackIcon="@drawable/ic_action_navigation_arrow_back"
+                app:searchCloseIcon="@drawable/ic_action_navigation_close" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/no_tweets" />
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="#e1e8ed"
+                android:dividerHeight="1dp"
+                android:drawSelectorOnTop="false" />
+
+            <TextView
+                android:id="@+id/emptyList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/no_tweets" />
+        </LinearLayout>
     </LinearLayout>
 
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/twitter" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/twitter" />
 
 </RelativeLayout>
