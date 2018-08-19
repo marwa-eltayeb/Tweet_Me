@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Instantiating loginButton
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
-
+        //loginButton.setBackgroundColor(Color.RED);
 
          /*
           Adding a callback to loginButton

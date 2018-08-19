@@ -22,7 +22,7 @@ public class MyTweetReceiver extends BroadcastReceiver {
         if (TweetUploadService.UPLOAD_SUCCESS.equals(intent.getAction())) {
             // success
             final Long tweetId = intentExtras.getLong(TweetUploadService.EXTRA_TWEET_ID);
-            Toast.makeText(context, tweetId.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, tweetId.toString(), Toast.LENGTH_SHORT).show();
         } else if (TweetUploadService.UPLOAD_FAILURE.equals(intent.getAction())) {
             // failure
             final Intent retryIntent = intentExtras.getParcelable(TweetUploadService.EXTRA_RETRY_INTENT);
