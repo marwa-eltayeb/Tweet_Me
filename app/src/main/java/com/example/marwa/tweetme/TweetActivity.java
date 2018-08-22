@@ -3,6 +3,8 @@ package com.example.marwa.tweetme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,16 +23,26 @@ import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineRecyclerViewAdapter;
 import com.twitter.sdk.android.tweetui.UserTimeline;
 
-public class TweetActivity extends AppCompatActivity {
+public class TweetActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private MaterialSearchView searchView;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    RecyclerView recyclerView;
+
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet);
 
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary));
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -42,30 +54,8 @@ public class TweetActivity extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        /* fetching the username from LoginActivity */
-        String username = getIntent().getStringExtra("username");
-
-        /* setting up a UserTimeline */
-        final UserTimeline userTimeline = new UserTimeline.Builder()
-                .screenName(username)
-                .includeReplies(true)
-                .includeRetweets(true)
-                .build();
-
-        final TweetTimelineRecyclerViewAdapter adapter =
-                new TweetTimelineRecyclerViewAdapter.Builder(this)
-                        .setTimeline(userTimeline)
-                        .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
-                        .build();
-
-        // If there is a list, hide TextView
-        TextView empty = (TextView) findViewById(R.id.emptyList);
-        if (adapter != null) {
-            empty.setVisibility(View.GONE);
-            recyclerView.setAdapter(adapter);
-        } else {
-            empty.setVisibility(View.VISIBLE);
-        }
+        // setting up a UserTimeline
+        setUpTweets();
 
         // Initialize the SearchView
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
@@ -118,7 +108,6 @@ public class TweetActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     /**
@@ -130,6 +119,52 @@ public class TweetActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
         return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        // Disable going back to the loginActivity
+        moveTaskToBack(true);
+    }
+
+    /**
+     * This method is called when swipe refresh is pulled down
+     */
+    @Override
+    public void onRefresh() {
+        setUpTweets();
+
+        // Hide refresh animation
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+
+    private void setUpTweets(){
+         /* fetching the username from LoginActivity */
+        username = getIntent().getStringExtra("username");
+
+        /* setting up a UserTimeline */
+        final UserTimeline userTimeline = new UserTimeline.Builder()
+                .screenName(username)
+                .includeReplies(true)
+                .includeRetweets(true)
+                .build();
+
+        final TweetTimelineRecyclerViewAdapter adapter =
+                new TweetTimelineRecyclerViewAdapter.Builder(this)
+                        .setTimeline(userTimeline)
+                        .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
+                        .build();
+
+        // If there is a list, hide TextView
+        TextView empty = (TextView) findViewById(R.id.emptyList);
+        if (adapter != null) {
+            empty.setVisibility(View.GONE);
+            recyclerView.setAdapter(adapter);
+        } else {
+            empty.setVisibility(View.VISIBLE);
+        }
     }
 
 }

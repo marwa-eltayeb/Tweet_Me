@@ -3,6 +3,7 @@ package com.example.marwa.tweetme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
@@ -63,6 +64,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+        // If the user logged in, disable going back to the loginActivity
+        try{
+            TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+            String username = session.getUserName();
+            if(!username.isEmpty()){
+                Intent intent = new Intent(LoginActivity.this, TweetActivity.class);
+                startActivity(intent);
+            }
+        }catch (NullPointerException e){
+            Log.v("LoginActivity","No Username");
+        }
+
+
     }
 
 
@@ -78,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     /**
      * @param requestCode - we'll set it to REQUEST_CAMERA
      * @param resultCode - this will store the result code
@@ -90,6 +107,5 @@ public class LoginActivity extends AppCompatActivity {
         // Pass the activity result to the login button.
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
-
 
 }
